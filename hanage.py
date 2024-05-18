@@ -94,6 +94,9 @@ def draw_power_meter():
     gauge_fill_height = int(GAUGE_HEIGHT * (power / 100))
     pyxel.rect(10, 10 + (GAUGE_HEIGHT - gauge_fill_height), GAUGE_WIDTH, gauge_fill_height, color)
 
+def show_mozi(x, y, text, size, color):
+    writer = puf.Writer("ipa_gothic.ttf")
+    writer.draw(x, y, text, size, color)
 
 def draw():
     pyxel.cls(0)
@@ -110,8 +113,10 @@ def draw():
         pyxel.text(110, 180, message, 7)
 
         # 制限時間を表示
-        writer = puf.Writer("ipa_gothic.ttf")
-        writer.draw(350, 10, f"残り時間: {time_left // 30}", 14, 7) # デバッグ用　draw(x座標, y座標, テキスト, フォントサイズ, 文字の色(7:白))
+        show_mozi(350, 10, f"残り時間: {time_left // 30}", 14, 7)
+
+        # writer = puf.Writer("ipa_gothic.ttf")
+        # writer.draw(350, 10, f"残り時間: {time_left // 30}", 14, 7) # デバッグ用　draw(x座標, y座標, テキスト, フォントサイズ, 文字の色(7:白))
 
         # スペシャル技の使用回数を表示
         writer = puf.Writer("ipa_gothic.ttf")
@@ -119,7 +124,7 @@ def draw():
 
         # 抜いた鼻毛の数を表示
         pyxel.text(200, 30, f"Successes: {success_count}", 7)
-        
+
     elif game_state == STATE_GAME_OVER:
         pyxel.text(100, 100, "Game Over", pyxel.frame_count % 16)
         pyxel.text(70, 120, "Press Enter to Continue", 7)

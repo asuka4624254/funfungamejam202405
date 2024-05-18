@@ -2,6 +2,7 @@ import pyxel
 import time
 
 from enum import Enum
+import PyxelUniversalFont as puf
 
 
 SCREEN_WIDTH = 480
@@ -69,26 +70,30 @@ class App:
         elif self.state == GameState.RETRY:
             self.show_retry()
 
+    def show_mozi(self, x, y, text, size, color):
+        writer = puf.Writer("ipa_gothic.ttf")
+        writer.draw(x, y, text, size, color)
+
     def show_splash(self):
-        pyxel.text(50, 60, "SPLASH SCREEN", 7)
+        self.show_mozi(150, 100, "SPLASH SCREEN", 21, 7)
 
     def show_prologue(self):
-        pyxel.text(50, 60, "PROLOGUE", 7)
+        self.show_mozi(50, 60, "PROLOGUE", 21, 7)
 
     def show_game_start(self):
-        pyxel.text(50, 60, "GAME START", 7)
+        self.show_mozi(50, 60, "GAME START", 21, 7)
 
     def start_game(self):
-        pyxel.text(50, 60, "PLAY ... PUSH SPACE", 7)
+        self.show_mozi(50, 60, "PLAY ... PUSH SPACE", 21, 7)
 
     def show_game_end(self):
-        pyxel.text(50, 60, "WIN / LOSE", 7)
+        self.show_mozi(50, 60, "WIN / LOSE", 21, 7)
 
     def show_result(self):
-        pyxel.text(50, 60, "RESULT ... PUSH SPACE", 7)
+        self.show_mozi(50, 60, "RESULT ... PUSH SPACE", 21, 7)
 
     def show_retry(self):
-        pyxel.text(50, 60, "RETRY ... PUSH SPACE", 7)
+        self.show_mozi(50, 60, "RETRY ... PUSH SPACE", 21, 7)
 
 
 App()
