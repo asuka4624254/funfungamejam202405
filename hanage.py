@@ -1,5 +1,6 @@
 import pyxel
 import random
+import PyxelUniversalFont
 
 # 定数の定義
 SCREEN_WIDTH = 480

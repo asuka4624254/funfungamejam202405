@@ -1,1 +1,2 @@
 pyxel==2.0.13
+pyxel-universal-font==1.1.1
