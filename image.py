@@ -16,6 +16,7 @@ class ImageAsset(IntEnum):
     PenguinL_01 = auto()
     PenguinL_02 = auto()
     PenguinL_03 = auto()
+    BG_01 = auto()
 
 
 class ImageInfo:
@@ -64,3 +65,4 @@ class Image:
         self.assets[ImageAsset.PenguinL_01] = ImageInfo(0, 0, 77, 50, 61)
         self.assets[ImageAsset.PenguinL_02] = ImageInfo(0, 50, 77, 50, 61)
         self.assets[ImageAsset.PenguinL_03] = ImageInfo(0, 100, 77, 50, 61)
+        self.assets[ImageAsset.BG_01] = ImageInfo(0, 150, 0, 96, 128)

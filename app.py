@@ -59,7 +59,8 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-        self.image.draw(ImageAsset.BearFace, 0, 0)
+        self.image.draw(ImageAsset.BG_01, 0, 0)
+        self.image.draw(ImageAsset.BearFace, 3, 84)
 
         # if self.state == GameState.SPLASH:
         #     self.show_splash()
