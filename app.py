@@ -3,10 +3,12 @@ import time
 
 from enum import Enum
 import PyxelUniversalFont as puf
+from image import Image, ImageAsset
 
 
-SCREEN_WIDTH = 480
-SCREEN_HEIGHT = 640
+SCREEN_WIDTH = 96  # 480
+SCREEN_HEIGHT = 128  # 640
+DISPLAY_SCALE = 5
 
 
 class GameState(Enum):
@@ -21,10 +23,12 @@ class GameState(Enum):
 
 class App:
     def __init__(self):
-        pyxel.init(SCREEN_WIDTH, SCREEN_HEIGHT)
+        pyxel.init(SCREEN_WIDTH, SCREEN_HEIGHT, display_scale=DISPLAY_SCALE)
 
         self.state = GameState.SPLASH
         self.start_time = time.time()
+
+        self.image = Image()
 
         pyxel.run(self.update, self.draw)
 
@@ -55,20 +59,22 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-        if self.state == GameState.SPLASH:
-            self.show_splash()
-        elif self.state == GameState.PROLOGUE:
-            self.show_prologue()
-        elif self.state == GameState.GAME_START:
-            self.show_game_start()
-        elif self.state == GameState.PLAY:
-            self.start_game()
-        elif self.state == GameState.GAME_END:
-            self.show_game_end()
-        elif self.state == GameState.RESULT:
-            self.show_result()
-        elif self.state == GameState.RETRY:
-            self.show_retry()
+        self.image.draw(ImageAsset.BearFace, 0, 0)
+
+        # if self.state == GameState.SPLASH:
+        #     self.show_splash()
+        # elif self.state == GameState.PROLOGUE:
+        #     self.show_prologue()
+        # elif self.state == GameState.GAME_START:
+        #     self.show_game_start()
+        # elif self.state == GameState.PLAY:
+        #     self.start_game()
+        # elif self.state == GameState.GAME_END:
+        #     self.show_game_end()
+        # elif self.state == GameState.RESULT:
+        #     self.show_result()
+        # elif self.state == GameState.RETRY:
+        #     self.show_retry()
 
     def show_mozi(self, x, y, text, size, color):
         writer = puf.Writer("ipa_gothic.ttf")
