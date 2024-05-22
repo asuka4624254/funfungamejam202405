@@ -34,15 +34,15 @@ class App:
 
     def update(self):
         if self.state == GameState.SPLASH:
-            self.check_transition(GameState.PROLOGUE, 5)
+            self.check_click(GameState.PROLOGUE)
         elif self.state == GameState.PROLOGUE:
-            self.check_transition(GameState.GAME_START, 5)
+            self.check_click(GameState.GAME_START)
         elif self.state == GameState.GAME_START:
-            self.check_transition(GameState.PLAY, 5)
+            self.check_click(GameState.PLAY)
         elif self.state == GameState.PLAY:
             self.check_click(GameState.GAME_END)
         elif self.state == GameState.GAME_END:
-            self.check_transition(GameState.RESULT, 5)
+            self.check_click(GameState.RESULT)
         elif self.state == GameState.RESULT:
             self.check_click(GameState.RETRY)
         elif self.state == GameState.RETRY:
@@ -59,50 +59,48 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-        self.image.draw(ImageAsset.BG_01, 0, 0)  # TODO: 試し置き
-        self.image.draw(ImageAsset.LOGO, 20, 30)  # TODO: 試し置き
-        self.image.draw(ImageAsset.PenguinM_01, 20, 60)  # TODO: 試し置き
-        self.image.draw(ImageAsset.BearFace, 3, 84)  # TODO: 試し置き
+        self.image.draw(ImageAsset.BG_01, 0, 0)
 
-        # if self.state == GameState.SPLASH:
-        #     self.show_splash()
-        # elif self.state == GameState.PROLOGUE:
-        #     self.show_prologue()
-        # elif self.state == GameState.GAME_START:
-        #     self.show_game_start()
-        # elif self.state == GameState.PLAY:
-        #     self.start_game()
-        # elif self.state == GameState.GAME_END:
-        #     self.show_game_end()
-        # elif self.state == GameState.RESULT:
-        #     self.show_result()
-        # elif self.state == GameState.RETRY:
-        #     self.show_retry()
+        if self.state == GameState.SPLASH:
+            self.show_splash()
+        elif self.state == GameState.PROLOGUE:
+            self.show_prologue()
+        elif self.state == GameState.GAME_START:
+            self.show_game_start()
+        elif self.state == GameState.PLAY:
+            self.start_game()
+        elif self.state == GameState.GAME_END:
+            self.show_game_end()
+        elif self.state == GameState.RESULT:
+            self.show_result()
+        elif self.state == GameState.RETRY:
+            self.show_retry()
 
     def show_mozi(self, x, y, text, size, color):
         writer = puf.Writer("ipa_gothic.ttf")
         writer.draw(x, y, text, size, color)
 
     def show_splash(self):
-        self.show_mozi(150, 100, "SPLASH SCREEN", 21, 7)
+        self.image.draw(ImageAsset.BEAR, 36, 41)
+        self.image.draw(ImageAsset.LOGO, 14, 85)
 
     def show_prologue(self):
-        self.show_mozi(50, 60, "PROLOGUE", 21, 7)
+        self.show_mozi(0, 0, "PROLOGUE", 10, 0)
 
     def show_game_start(self):
-        self.show_mozi(50, 60, "GAME START", 21, 7)
+        self.show_mozi(0, 0, "GAME START", 10, 0)
 
     def start_game(self):
-        self.show_mozi(50, 60, "PLAY ... PUSH SPACE", 21, 7)
+        self.show_mozi(0, 0, "PLAY", 10, 0)
 
     def show_game_end(self):
-        self.show_mozi(50, 60, "WIN / LOSE", 21, 7)
+        self.show_mozi(0, 0, "WIN / LOSE", 10, 0)
 
     def show_result(self):
-        self.show_mozi(50, 60, "RESULT ... PUSH SPACE", 21, 7)
+        self.show_mozi(0, 0, "RESULT", 10, 0)
 
     def show_retry(self):
-        self.show_mozi(50, 60, "RETRY ... PUSH SPACE", 21, 7)
+        self.show_mozi(0, 0, "RETRY ", 10, 0)
 
 
 App()
