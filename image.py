@@ -55,16 +55,21 @@ class Image:
     def set_image_info(self):
         self.assets[ImageAsset.BearFace] = ImageInfo(0, 0, 0, 91, 44)
         self.assets[ImageAsset.Tear] = ImageInfo(0, 91, 0, 6, 11)
+
         self.assets[ImageAsset.Tweezers_01] = ImageInfo(0, 97, 0, 16, 13)
         self.assets[ImageAsset.Tweezers_02] = ImageInfo(0, 113, 0, 16, 13)
-        self.assets[ImageAsset.PenguinS_01] = ImageInfo(0, 91, 13, 13, 15)
-        self.assets[ImageAsset.PenguinS_02] = ImageInfo(0, 104, 13, 13, 15)
-        self.assets[ImageAsset.PenguinS_03] = ImageInfo(0, 117, 13, 13, 15)
-        self.assets[ImageAsset.PenguinM_01] = ImageInfo(0, 0, 44, 28, 33)
-        self.assets[ImageAsset.PenguinM_02] = ImageInfo(0, 28, 44, 28, 33)
-        self.assets[ImageAsset.PenguinM_03] = ImageInfo(0, 56, 44, 28, 33)
-        self.assets[ImageAsset.PenguinL_01] = ImageInfo(0, 0, 77, 50, 61)
-        self.assets[ImageAsset.PenguinL_02] = ImageInfo(0, 50, 77, 50, 61)
-        self.assets[ImageAsset.PenguinL_03] = ImageInfo(0, 100, 77, 50, 61)
-        self.assets[ImageAsset.LOGO] = ImageInfo(0, 89, 28, 68, 30)
+
+        self.assets[ImageAsset.PenguinS_01] = ImageInfo(0, 91, 13, 13, 16)
+        self.assets[ImageAsset.PenguinS_02] = ImageInfo(0, 104, 13, 13, 16)
+        self.assets[ImageAsset.PenguinS_03] = ImageInfo(0, 117, 13, 13, 16)
+
+        self.assets[ImageAsset.PenguinM_01] = ImageInfo(0, 0, 44, 28, 34)
+        self.assets[ImageAsset.PenguinM_02] = ImageInfo(0, 28, 44, 28, 34)
+        self.assets[ImageAsset.PenguinM_03] = ImageInfo(0, 56, 44, 28, 34)
+
+        self.assets[ImageAsset.PenguinL_01] = ImageInfo(0, 0, 78, 50, 63)
+        self.assets[ImageAsset.PenguinL_02] = ImageInfo(0, 50, 78, 50, 63)
+        self.assets[ImageAsset.PenguinL_03] = ImageInfo(0, 100, 78, 50, 63)
+
+        self.assets[ImageAsset.LOGO] = ImageInfo(0, 89, 29, 68, 30)
         self.assets[ImageAsset.BG_01] = ImageInfo(0, 157, 0, 96, 128)
