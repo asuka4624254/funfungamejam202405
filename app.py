@@ -59,8 +59,10 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-        self.image.draw(ImageAsset.BG_01, 0, 0)
-        self.image.draw(ImageAsset.BearFace, 3, 84)
+        self.image.draw(ImageAsset.BG_01, 0, 0)  # TODO: 試し置き
+        self.image.draw(ImageAsset.LOGO, 20, 30)  # TODO: 試し置き
+        self.image.draw(ImageAsset.PenguinM_01, 20, 60)  # TODO: 試し置き
+        self.image.draw(ImageAsset.BearFace, 3, 84)  # TODO: 試し置き
 
         # if self.state == GameState.SPLASH:
         #     self.show_splash()

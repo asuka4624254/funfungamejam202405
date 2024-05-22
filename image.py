@@ -16,6 +16,7 @@ class ImageAsset(IntEnum):
     PenguinL_01 = auto()
     PenguinL_02 = auto()
     PenguinL_03 = auto()
+    LOGO = auto()
     BG_01 = auto()
 
 
@@ -48,12 +49,12 @@ class Image:
             v=asset.v,
             w=asset.w,
             h=asset.h,
-            colkey=3,
+            colkey=0,
         )
 
     def set_image_info(self):
         self.assets[ImageAsset.BearFace] = ImageInfo(0, 0, 0, 91, 44)
-        self.assets[ImageAsset.Tear] = ImageInfo(0, 91, 0, 6, 11)  # FIXME: 表示されない
+        self.assets[ImageAsset.Tear] = ImageInfo(0, 91, 0, 6, 11)
         self.assets[ImageAsset.Tweezers_01] = ImageInfo(0, 97, 0, 16, 13)
         self.assets[ImageAsset.Tweezers_02] = ImageInfo(0, 113, 0, 16, 13)
         self.assets[ImageAsset.PenguinS_01] = ImageInfo(0, 91, 13, 13, 15)
@@ -65,4 +66,5 @@ class Image:
         self.assets[ImageAsset.PenguinL_01] = ImageInfo(0, 0, 77, 50, 61)
         self.assets[ImageAsset.PenguinL_02] = ImageInfo(0, 50, 77, 50, 61)
         self.assets[ImageAsset.PenguinL_03] = ImageInfo(0, 100, 77, 50, 61)
-        self.assets[ImageAsset.BG_01] = ImageInfo(0, 150, 0, 96, 128)
+        self.assets[ImageAsset.LOGO] = ImageInfo(0, 89, 28, 68, 30)
+        self.assets[ImageAsset.BG_01] = ImageInfo(0, 157, 0, 96, 128)
