@@ -4,6 +4,7 @@ import time
 from enum import Enum
 import PyxelUniversalFont as puf
 from image import ImageManager, ImageName
+from timeline import TimelineManager, TimelineName
 
 DEFAULT_FPS = 30
 SCREEN_WIDTH = 96  # 480
@@ -31,6 +32,7 @@ class App:
         self.start_time = time.time()
 
         self.image = ImageManager()
+        self.timeline = TimelineManager()
 
         pyxel.run(self.update, self.draw)
 
@@ -88,6 +90,7 @@ class App:
 
     def show_prologue(self):
         self.show_mozi(0, 0, "PROLOGUE", 10, 0)
+        self.timeline.play(TimelineName.Prologue)
 
     def show_game_start(self):
         self.show_mozi(0, 0, "GAME START", 10, 0)
