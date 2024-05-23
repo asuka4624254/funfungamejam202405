@@ -85,7 +85,7 @@ class App:
         writer.draw(x, y, text, size, color)
 
     def show_splash(self):
-        self.image.draw(ImageName.Bear, 36, 41)
+        self.image.draw(ImageName.Bear_01, 36, 41)
         self.image.draw(ImageName.Logo, 14, 85)
 
     def show_prologue(self):

@@ -21,11 +21,11 @@ class ImageName(IntEnum):
     Logo = auto()
     BG_01 = auto()
     Bear = auto()
+    Bear_01 = auto()
+    Bear_02 = auto()
 
     Prologue_Penguin_01 = auto()
     Prologue_Penguin_02 = auto()
-    Prologue_Bear_01 = auto()
-    Prologue_Bear_02 = auto()
     Prologue_BearFace_01 = auto()
     Prologue_BearFace_02 = auto()
 
@@ -102,15 +102,13 @@ class ImageManager:
         self.assets[ImageName.Logo] = ImageInfo(0, 89, 29, 68, 30)
         self.assets[ImageName.BG_01] = ImageInfo(0, 157, 0, 96, 128)
         self.assets[ImageName.Bear] = ImageInfo(0, 0, 141, 26, 37)
+        self.assets[ImageName.Bear_01] = ImageInfo(0, 0, 141, 26, 37, ImageName.Bear_02)
+        self.assets[ImageName.Bear_02] = ImageInfo(0, 26, 141, 26, 37)
 
         self.assets[ImageName.Prologue_Penguin_01] = ImageInfo(
             0, 52, 141, 30, 34, ImageName.Prologue_Penguin_02
         )
         self.assets[ImageName.Prologue_Penguin_02] = ImageInfo(0, 82, 141, 30, 34)
-        self.assets[ImageName.Prologue_Bear_01] = ImageInfo(
-            0, 0, 141, 26, 37, ImageName.Prologue_Bear_02
-        )
-        self.assets[ImageName.Prologue_Bear_02] = ImageInfo(0, 26, 141, 26, 37)
         self.assets[ImageName.Prologue_BearFace_01] = ImageInfo(
             0, 0, 178, 91, 44, ImageName.Prologue_BearFace_02
         )
