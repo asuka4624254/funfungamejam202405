@@ -21,6 +21,9 @@ class ImageName(IntEnum):
     LOGO = auto()
     BG_01 = auto()
     BEAR = auto()
+    CLEAR_BG_01 = auto()
+    CLEAR_BG_02 = auto()
+    CLEAR = auto()
 
 
 class ImageInfo:
@@ -95,3 +98,9 @@ class ImageManager:
         self.assets[ImageName.LOGO] = ImageInfo(0, 89, 29, 68, 30)
         self.assets[ImageName.BG_01] = ImageInfo(0, 157, 0, 96, 128)
         self.assets[ImageName.BEAR] = ImageInfo(0, 0, 141, 26, 37)
+
+        self.assets[ImageName.CLEAR_BG_01] = ImageInfo(
+            0, 26, 141, 89, 55, ImageName.CLEAR_BG_02
+        )
+        self.assets[ImageName.CLEAR_BG_02] = ImageInfo(0, 115, 141, 89, 55)
+        self.assets[ImageName.CLEAR] = ImageInfo(0, 0, 196, 62, 24)

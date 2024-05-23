@@ -102,10 +102,12 @@ class App:
 
     def show_game_end(self):
         self.show_mozi(0, 0, "WIN / LOSE", 10, 0)
-        self.image.draw(ImageName.PenguinM_02, 34, 26)
+        self.image.draw(ImageName.CLEAR_BG_01, 3, 36)
+        self.image.draw(ImageName.CLEAR, 17, 52)
 
     def show_result(self):
         self.show_mozi(0, 0, "RESULT", 10, 0)
+        self.image.draw(ImageName.PenguinM_02, 34, 26)
         self.image.draw(ImageName.PenguinL_02, 23, 40)
 
     def show_retry(self):
