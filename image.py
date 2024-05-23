@@ -18,12 +18,16 @@ class ImageName(IntEnum):
     PenguinL_01 = auto()
     PenguinL_02 = auto()
     PenguinL_03 = auto()
-    LOGO = auto()
+    Logo = auto()
     BG_01 = auto()
-    BEAR = auto()
-    CLEAR_BG_01 = auto()
-    CLEAR_BG_02 = auto()
-    CLEAR = auto()
+    Bear = auto()
+
+    Prologue_Penguin_01 = auto()
+    Prologue_Penguin_02 = auto()
+    Prologue_Bear_01 = auto()
+    Prologue_Bear_02 = auto()
+    Prologue_BearFace_01 = auto()
+    Prologue_BearFace_02 = auto()
 
 
 class ImageInfo:
@@ -95,12 +99,19 @@ class ImageManager:
         )
         self.assets[ImageName.PenguinL_03] = ImageInfo(0, 100, 78, 50, 63)
 
-        self.assets[ImageName.LOGO] = ImageInfo(0, 89, 29, 68, 30)
+        self.assets[ImageName.Logo] = ImageInfo(0, 89, 29, 68, 30)
         self.assets[ImageName.BG_01] = ImageInfo(0, 157, 0, 96, 128)
-        self.assets[ImageName.BEAR] = ImageInfo(0, 0, 141, 26, 37)
+        self.assets[ImageName.Bear] = ImageInfo(0, 0, 141, 26, 37)
 
-        self.assets[ImageName.CLEAR_BG_01] = ImageInfo(
-            0, 26, 141, 89, 55, ImageName.CLEAR_BG_02
+        self.assets[ImageName.Prologue_Penguin_01] = ImageInfo(
+            0, 52, 141, 30, 34, ImageName.Prologue_Penguin_02
         )
-        self.assets[ImageName.CLEAR_BG_02] = ImageInfo(0, 115, 141, 89, 55)
-        self.assets[ImageName.CLEAR] = ImageInfo(0, 0, 196, 62, 24)
+        self.assets[ImageName.Prologue_Penguin_02] = ImageInfo(0, 82, 141, 30, 34)
+        self.assets[ImageName.Prologue_Bear_01] = ImageInfo(
+            0, 0, 141, 26, 37, ImageName.Prologue_Bear_02
+        )
+        self.assets[ImageName.Prologue_Bear_02] = ImageInfo(0, 26, 141, 26, 37)
+        self.assets[ImageName.Prologue_BearFace_01] = ImageInfo(
+            0, 0, 178, 91, 44, ImageName.Prologue_BearFace_02
+        )
+        self.assets[ImageName.Prologue_BearFace_02] = ImageInfo(0, 91, 178, 91, 44)

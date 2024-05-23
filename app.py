@@ -85,8 +85,8 @@ class App:
         writer.draw(x, y, text, size, color)
 
     def show_splash(self):
-        self.image.draw(ImageName.BEAR, 36, 41)
-        self.image.draw(ImageName.LOGO, 14, 85)
+        self.image.draw(ImageName.Bear, 36, 41)
+        self.image.draw(ImageName.Logo, 14, 85)
 
     def show_prologue(self):
         self.show_mozi(0, 0, "PROLOGUE", 10, 0)
