@@ -3,9 +3,9 @@ import time
 
 from enum import Enum
 import PyxelUniversalFont as puf
-from image import Image, ImageAsset
+from image import ImageManager, ImageName
 
-
+DEFAULT_FPS = 30
 SCREEN_WIDTH = 96  # 480
 SCREEN_HEIGHT = 128  # 640
 DISPLAY_SCALE = 5
@@ -23,12 +23,14 @@ class GameState(Enum):
 
 class App:
     def __init__(self):
-        pyxel.init(SCREEN_WIDTH, SCREEN_HEIGHT, display_scale=DISPLAY_SCALE)
+        pyxel.init(
+            SCREEN_WIDTH, SCREEN_HEIGHT, fps=DEFAULT_FPS, display_scale=DISPLAY_SCALE
+        )
 
         self.state = GameState.SPLASH
         self.start_time = time.time()
 
-        self.image = Image()
+        self.image = ImageManager()
 
         pyxel.run(self.update, self.draw)
 
@@ -59,7 +61,7 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-        self.image.draw(ImageAsset.BG_01, 0, 0)
+        self.image.draw(ImageName.BG_01, 0, 0)
 
         if self.state == GameState.SPLASH:
             self.show_splash()
@@ -81,8 +83,8 @@ class App:
         writer.draw(x, y, text, size, color)
 
     def show_splash(self):
-        self.image.draw(ImageAsset.BEAR, 36, 41)
-        self.image.draw(ImageAsset.LOGO, 14, 85)
+        self.image.draw(ImageName.BEAR, 36, 41)
+        self.image.draw(ImageName.LOGO, 14, 85)
 
     def show_prologue(self):
         self.show_mozi(0, 0, "PROLOGUE", 10, 0)
@@ -92,17 +94,19 @@ class App:
 
     def start_game(self):
         self.show_mozi(0, 0, "PLAY", 10, 0)
-        self.image.draw(ImageAsset.BearFace, 3, 84)
-        self.image.draw(ImageAsset.Tweezers_01, 76, 32)
-        self.image.draw(ImageAsset.Tweezers_01, 76, 46)
-        self.image.draw(ImageAsset.Tweezers_01, 76, 60)
-        self.image.draw(ImageAsset.PenguinS_01, 41, 17)
+        self.image.draw(ImageName.BearFace, 3, 84)
+        self.image.draw(ImageName.Tweezers_01, 76, 32, animation_speed=0.8)
+        self.image.draw(ImageName.Tweezers_01, 76, 46, animation_speed=0.8)
+        self.image.draw(ImageName.Tweezers_01, 76, 60, animation_speed=0.8)
+        self.image.draw(ImageName.PenguinS_02, 41, 17)
 
     def show_game_end(self):
         self.show_mozi(0, 0, "WIN / LOSE", 10, 0)
+        self.image.draw(ImageName.PenguinM_02, 34, 26)
 
     def show_result(self):
         self.show_mozi(0, 0, "RESULT", 10, 0)
+        self.image.draw(ImageName.PenguinL_02, 23, 40)
 
     def show_retry(self):
         self.show_mozi(0, 0, "RETRY ", 10, 0)
