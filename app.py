@@ -92,6 +92,11 @@ class App:
 
     def start_game(self):
         self.show_mozi(0, 0, "PLAY", 10, 0)
+        self.image.draw(ImageAsset.BearFace, 3, 84)
+        self.image.draw(ImageAsset.Tweezers_01, 76, 32)
+        self.image.draw(ImageAsset.Tweezers_01, 76, 46)
+        self.image.draw(ImageAsset.Tweezers_01, 76, 60)
+        self.image.draw(ImageAsset.PenguinS_01, 41, 17)
 
     def show_game_end(self):
         self.show_mozi(0, 0, "WIN / LOSE", 10, 0)
