@@ -20,11 +20,10 @@ HAIR_FALL_DURATION = 15
 HAIR_REGROW_DELAY = 30
 TWEEZER_SLOWDOWN = 0.5
 
-HARD_MODE_MULTIPLIER = 2
-HARD_MODE_HAIR_COUNT = 20
+HARD_MODE_MULTIPLIER = 2  # ハードモードのゲージ上昇速度倍率
+HARD_MODE_HAIR_COUNT = 20  # ハードモードの抜く本数
 
-SHAKE_INTERVAL = 90  # 画面を揺らした後のインターバル
-
+# ゲーム状態の定義
 class GameState(Enum):
     SPLASH = 1
     PROLOGUE = 2
@@ -48,11 +47,11 @@ hair_fall_frame = 0
 hair_regrow_frame = 0
 last_state_change_time = time.time()
 is_hard_mode = False
-shake_interval = 0
 
+# ゲームのメインクラス
 class App:
     def __init__(self, n):
-        global hair_left, last_state_change_time, shake_interval
+        global hair_left, last_state_change_time, is_hard_mode
         pyxel.init(SCREEN_WIDTH, SCREEN_HEIGHT, fps=DEFAULT_FPS, display_scale=DISPLAY_SCALE)
         pyxel.mouse(True)
 
@@ -65,12 +64,12 @@ class App:
         hair_left = n
         last_state_change_time = time.time()
         self.state_change_allowed = True
-        shake_interval = 0
+        is_hard_mode = False
 
         pyxel.run(self.update, self.draw)
 
     def reset_game(self):
-        global power, increasing, message, time_left, special_count, hair_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_count, tweezer_active, last_state_change_time, shake_interval
+        global power, increasing, message, time_left, special_count, hair_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_count, tweezer_active, last_state_change_time, is_hard_mode
         power = 0
         increasing = True
         message = ""
@@ -84,16 +83,15 @@ class App:
         hair_regrow_frame = 0
         last_state_change_time = time.time()
         self.state_change_allowed = True
-        shake_interval = 0
         if is_hard_mode:
             hair_left = HARD_MODE_HAIR_COUNT
-            tweezer_count = 0
+            tweezer_count = 0  # ハードモードでは毛抜が使えない
 
     def update_power(self):
-        global power, increasing, tweezer_active
+        global power, increasing, tweezer_active, is_hard_mode
         increment = random.randint(1, 3)
         if is_hard_mode:
-            increment *= HARD_MODE_MULTIPLIER
+            increment *= HARD_MODE_MULTIPLIER  # ハードモードではゲージの上昇が早い
         if tweezer_active:
             increment = int(increment * TWEEZER_SLOWDOWN)
 
@@ -135,7 +133,7 @@ class App:
             message = "毛抜使うよ！"
 
     def update(self):
-        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, shake_interval
+        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, is_hard_mode
         if not self.state_change_allowed and time.time() - last_state_change_time > 1:
             self.state_change_allowed = True
 
@@ -144,7 +142,6 @@ class App:
             self.check_click(GameState.PROLOGUE)
         elif self.state == GameState.PROLOGUE:
             if pyxel.btn(pyxel.KEY_SHIFT):
-                global is_hard_mode
                 is_hard_mode = True
             self.check_click(GameState.GAME_START)
         elif self.state == GameState.GAME_START:
@@ -194,18 +191,13 @@ class App:
 
             if time_left <= 0:
                 self.state = GameState.GAME_MISS
-                shake_interval = SHAKE_INTERVAL
                 self.set_state_change_time()
         elif self.state == GameState.GAME_CLEAR:
-            global is_hard_mode
             is_hard_mode = False
             self.check_click(GameState.RETRY)
         elif self.state == GameState.GAME_MISS:
             is_hard_mode = False
-            if shake_interval > 0:
-                shake_interval -= 1
-            else:
-                self.check_click(GameState.RETRY)
+            self.check_click(GameState.RETRY)
         elif self.state == GameState.RETRY:
             is_hard_mode = False
             self.check_click(GameState.SPLASH)
@@ -214,7 +206,7 @@ class App:
         if power < 40:
             color = 12
         elif power > 60:
-            color = 8
+            color = 12
         else:
             color = 10
 
@@ -228,7 +220,7 @@ class App:
             self.start_time = time.time()
 
     def check_click(self, next_status):
-        if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) and self.state_change_allowed and shake_interval == 0:
+        if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) and self.state_change_allowed:
             self.state = next_status
             self.set_state_change_time()
 
