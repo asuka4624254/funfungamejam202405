@@ -2,7 +2,7 @@ import pyxel
 import time
 import random
 
-from enum import Enum
+from enum import Enum, auto
 from image import ImageManager, ImageName
 from timeline import TimelineManager, TimelineName
 
@@ -23,15 +23,18 @@ TWEEZER_SLOWDOWN = 0.5
 HARD_MODE_MULTIPLIER = 2  # ハードモードのゲージ上昇速度倍率
 HARD_MODE_HAIR_COUNT = 20  # ハードモードの抜く本数
 
+
 # ゲーム状態の定義
 class GameState(Enum):
-    SPLASH = 1
-    PROLOGUE = 2
-    GAME_START = 3
-    PLAY = 4
-    GAME_CLEAR = 5
-    GAME_MISS = 6
-    RETRY = 7
+    SPLASH = auto()
+    PROLOGUE = auto()
+    READY = auto()
+    GAME_START = auto()
+    PLAY = auto()
+    GAME_CLEAR = auto()
+    GAME_MISS = auto()
+    RETRY = auto()
+
 
 # グローバル変数
 power = 0
@@ -47,12 +50,16 @@ hair_fall_frame = 0
 hair_regrow_frame = 0
 last_state_change_time = time.time()
 is_hard_mode = False
+high_score = None  # ハイスコアを記録する変数を追加
+
 
 # ゲームのメインクラス
 class App:
     def __init__(self, n):
         global hair_left, last_state_change_time, is_hard_mode
-        pyxel.init(SCREEN_WIDTH, SCREEN_HEIGHT, fps=DEFAULT_FPS, display_scale=DISPLAY_SCALE)
+        pyxel.init(
+            SCREEN_WIDTH, SCREEN_HEIGHT, fps=DEFAULT_FPS, display_scale=DISPLAY_SCALE
+        )
         pyxel.mouse(True)
 
         self.state = GameState.SPLASH
@@ -133,17 +140,23 @@ class App:
             message = "毛抜使うよ！"
 
     def update(self):
-        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, is_hard_mode
+        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, is_hard_mode, high_score
         if not self.state_change_allowed and time.time() - last_state_change_time > 1:
             self.state_change_allowed = True
 
         if self.state == GameState.SPLASH:
-            self.timeline.reset()
             self.check_click(GameState.PROLOGUE)
         elif self.state == GameState.PROLOGUE:
             if pyxel.btn(pyxel.KEY_SHIFT):
                 is_hard_mode = True
-            self.check_click(GameState.GAME_START)
+            self.check_click(GameState.READY)
+            if self.timeline.is_play(TimelineName.Prologue) == False:
+                self.state = GameState.READY
+                self.timeline.reset()
+        elif self.state == GameState.READY:
+            if self.timeline.is_play(TimelineName.Ready) == False:
+                self.state = GameState.GAME_START
+                self.timeline.reset()
         elif self.state == GameState.GAME_START:
             self.reset_game()
             self.check_click(GameState.PLAY)
@@ -189,6 +202,11 @@ class App:
                 self.state = GameState.GAME_CLEAR
                 self.set_state_change_time()
 
+                # クリア時間を記録
+                clear_time = time.time() - self.start_time
+                if high_score is None or clear_time < high_score:
+                    high_score = clear_time
+
             if time_left <= 0:
                 self.state = GameState.GAME_MISS
                 self.set_state_change_time()
@@ -212,7 +230,13 @@ class App:
 
         pyxel.rect(6, 8, GAUGE_WIDTH, GAUGE_HEIGHT, 5)
         gauge_fill_height = int(GAUGE_HEIGHT * (power / 100))
-        pyxel.rect(6, 8 + (GAUGE_HEIGHT - gauge_fill_height), GAUGE_WIDTH, gauge_fill_height, color)
+        pyxel.rect(
+            6,
+            8 + (GAUGE_HEIGHT - gauge_fill_height),
+            GAUGE_WIDTH,
+            gauge_fill_height,
+            color,
+        )
 
     def check_transition(self, next_status, transition_seconds):
         if time.time() - self.start_time > transition_seconds:
@@ -237,6 +261,8 @@ class App:
             self.show_splash()
         elif self.state == GameState.PROLOGUE:
             self.show_prologue()
+        elif self.state == GameState.READY:
+            self.show_ready()
         elif self.state == GameState.GAME_START:
             self.show_game_start()
         elif self.state == GameState.PLAY:
@@ -251,12 +277,17 @@ class App:
     def show_splash(self):
         self.image.draw(ImageName.Bear_01, 36, 35)
         self.image.draw(ImageName.Logo_01, 14, 81)
+        if high_score is not None:
+            pyxel.text(4, 4, f"High Score: {high_score:.2f} sec", pyxel.COLOR_WHITE)  # ハイスコアを左上に表示
 
     def show_prologue(self):
         self.timeline.play(TimelineName.Prologue)
 
+    def show_ready(self):
+        self.timeline.play(TimelineName.Ready)
+
     def show_game_start(self):
-        pyxel.text(0, 0, "GAME START", 10)
+        pass
 
     def start_game(self):
         self.draw_tweezer()
@@ -270,10 +301,10 @@ class App:
 
         self.draw_power_meter()
 
-        pyxel.text(110 / 5, 180 / 5, message, 1)
+        pyxel.text(110 / 5, 50, message, 1)
 
-        pyxel.text(68, 8, f"TIME:{time_left // 30}", 1)
-        pyxel.text(68, 15, f"LEFT:{hair_left}", 1)
+        pyxel.text(64, 8, f"TIME:{time_left // 30}", 1)
+        pyxel.text(64, 15, f"LEFT:{hair_left}", 1)
 
     def draw_tweezer(self):
         if tweezer_count >= 1:
@@ -316,6 +347,7 @@ class App:
 
     def show_retry(self):
         self.image.draw(ImageName.Reset_01, 30, 49)
+
 
 # ゲーム開始時に n を指定する
 n = 10

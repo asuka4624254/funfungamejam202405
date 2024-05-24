@@ -50,6 +50,7 @@ hair_fall_frame = 0
 hair_regrow_frame = 0
 last_state_change_time = time.time()
 is_hard_mode = False
+high_score = None  # ハイスコアを記録する変数を追加
 
 
 # ゲームのメインクラス
@@ -139,7 +140,7 @@ class App:
             message = "毛抜使うよ！"
 
     def update(self):
-        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, is_hard_mode
+        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, is_hard_mode, high_score
         if not self.state_change_allowed and time.time() - last_state_change_time > 1:
             self.state_change_allowed = True
 
@@ -200,6 +201,11 @@ class App:
             if hair_left <= 0:
                 self.state = GameState.GAME_CLEAR
                 self.set_state_change_time()
+
+                # クリア時間を記録
+                clear_time = time.time() - self.start_time
+                if high_score is None or clear_time < high_score:
+                    high_score = clear_time
 
             if time_left <= 0:
                 self.state = GameState.GAME_MISS
@@ -271,6 +277,8 @@ class App:
     def show_splash(self):
         self.image.draw(ImageName.Bear_01, 36, 35)
         self.image.draw(ImageName.Logo_01, 14, 81)
+        if high_score is not None:
+            pyxel.text(4, 4, f"High Score: {high_score:.2f} sec", pyxel.COLOR_WHITE)  # ハイスコアを左上に表示
 
     def show_prologue(self):
         self.timeline.play(TimelineName.Prologue)
