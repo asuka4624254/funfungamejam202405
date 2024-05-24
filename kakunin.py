@@ -88,7 +88,7 @@ class App:
             tweezer_count = 0  # ハードモードでは毛抜が使えない
 
     def update_power(self):
-        global power, increasing, tweezer_active
+        global power, increasing, tweezer_active, is_hard_mode
         increment = random.randint(1, 3)
         if is_hard_mode:
             increment *= HARD_MODE_MULTIPLIER  # ハードモードではゲージの上昇が早い
@@ -133,7 +133,7 @@ class App:
             message = "毛抜使うよ！"
 
     def update(self):
-        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active
+        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, is_hard_mode
         if not self.state_change_allowed and time.time() - last_state_change_time > 1:
             self.state_change_allowed = True
 
@@ -142,7 +142,6 @@ class App:
             self.check_click(GameState.PROLOGUE)
         elif self.state == GameState.PROLOGUE:
             if pyxel.btn(pyxel.KEY_SHIFT):
-                global is_hard_mode
                 is_hard_mode = True
             self.check_click(GameState.GAME_START)
         elif self.state == GameState.GAME_START:
@@ -194,17 +193,20 @@ class App:
                 self.state = GameState.GAME_MISS
                 self.set_state_change_time()
         elif self.state == GameState.GAME_CLEAR:
+            is_hard_mode = False
             self.check_click(GameState.RETRY)
         elif self.state == GameState.GAME_MISS:
+            is_hard_mode = False
             self.check_click(GameState.RETRY)
         elif self.state == GameState.RETRY:
+            is_hard_mode = False
             self.check_click(GameState.SPLASH)
 
     def draw_power_meter(self):
         if power < 40:
             color = 12
         elif power > 60:
-            color = 8
+            color = 12
         else:
             color = 10
 
