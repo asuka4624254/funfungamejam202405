@@ -102,10 +102,10 @@ class TextManager:
         )  # うつった自分のすがた
         self.texts[TextName.Prologue_04_03] = TextInfo(21, 84, 8 * 11)  # よーく見ると…
 
-        self.texts[TextName.Prologue_05_01] = TextInfo(33, 50, 8 * 12)  # はなから
+        self.texts[TextName.Prologue_05_01] = TextInfo(25, 50, 8 * 12)  # は、はなから
         self.texts[TextName.Prologue_05_02] = TextInfo(
-            10, 62, 8 * 13
-        )  # ア、アレが出てる…！
+            18, 62, 8 * 13
+        )  # アレが出てる…！
 
         self.texts[TextName.Prologue_06_01] = TextInfo(20, 60, 8 * 14)  # ペンギンさんに
         self.texts[TextName.Prologue_06_02] = TextInfo(24, 72, 8 * 15)  # 見られる前に
