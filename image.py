@@ -29,6 +29,9 @@ class ImageName(IntEnum):
     Prologue_BearFace_01 = auto()
     Prologue_BearFace_02 = auto()
 
+    Reset_01 = auto()
+    Reset_02 = auto()
+
 
 class ImageInfo:
     def __init__(self, index, u, v, w, h, animate_with=None):
@@ -113,3 +116,8 @@ class ImageManager:
             0, 0, 178, 91, 44, ImageName.Prologue_BearFace_02
         )
         self.assets[ImageName.Prologue_BearFace_02] = ImageInfo(0, 91, 178, 91, 44)
+
+        self.assets[ImageName.Reset_01] = ImageInfo(
+            0, 0, 222, 36, 31, ImageName.Reset_02
+        )
+        self.assets[ImageName.Reset_02] = ImageInfo(0, 36, 222, 36, 31)

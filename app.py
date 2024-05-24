@@ -282,7 +282,7 @@ class App:
         self.image.draw(ImageName.PenguinL_02, 23, 40)
 
     def show_retry(self):
-        pyxel.text(0, 0, "RETRY ", 10)
+        self.image.draw(ImageName.Reset_01, 30, 49)
 
 
 App()
