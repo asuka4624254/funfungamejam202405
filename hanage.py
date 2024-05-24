@@ -7,8 +7,8 @@ SCREEN_WIDTH = 96 #解像度 実際はこれを５倍する
 SCREEN_HEIGHT = 128 #解像度 実際はこれを５倍する
 TIME_INCREMENT = 3000  #残り時間を定義する。(10秒=300フレーム)
 TIME_DECREMENT_ON_FAIL = 30 #間違ったときのペナルティー時間
-GAUGE_HEIGHT = 200 /5 #パワーメータの高さ方向のピクセル数
-GAUGE_WIDTH = 10 /5 #パワーメータの横方向のピクセル数
+GAUGE_HEIGHT = 66 #パワーメータの高さ方向のピクセル数
+GAUGE_WIDTH = 4 #パワーメータの横方向のピクセル数
 HAIR_FALL_DURATION = 15  # 鼻毛が落下するフレーム数
 HAIR_REGROW_DELAY = 30  # 鼻毛が再生するまでのフレーム数
 TWEEZER_SLOWDOWN = 0.5  # 毛抜アイテム使用時のゲージ上昇減少倍率
@@ -130,9 +130,9 @@ def draw_power_meter(): #パワーメータの関数を定義
     else: #それ以外なら
         color = 10  # 黄色
 
-    pyxel.rect(10, 10, GAUGE_WIDTH, GAUGE_HEIGHT, 5) # 幅 GAUGE_WIDTH、高さ GAUGE_HEIGHT、色 5 の長方形を (10, 10) から四角形を描画します。
+    pyxel.rect(6, 8, GAUGE_WIDTH, GAUGE_HEIGHT, 5) # 幅 GAUGE_WIDTH、高さ GAUGE_HEIGHT、色 5 の長方形を (10, 10) から四角形を描画します。
     gauge_fill_height = int(GAUGE_HEIGHT * (power / 100)) #power は0から100の範囲の値で、現在のパワーレベルを示します
-    pyxel.rect(10, 10 + (GAUGE_HEIGHT - gauge_fill_height), GAUGE_WIDTH, gauge_fill_height, color) #Pyxelライブラリを使って画面上に矩形を描画するためのコードです。この特定のコードは、パワーゲージの充填部分を描画するために使用されています。
+    pyxel.rect(6, 8 + (GAUGE_HEIGHT - gauge_fill_height), GAUGE_WIDTH, gauge_fill_height, color) #Pyxelライブラリを使って画面上に矩形を描画するためのコードです。この特定のコードは、パワーゲージの充填部分を描画するために使用されています。
 #10 + (GAUGE_HEIGHT - gauge_fill_height): 矩形の左上隅のY座標です。ここでは、矩形の左上隅が画面の縦方向に 10 + (GAUGE_HEIGHT - gauge_fill_height) ピクセルの位置に描画されます。この式は、パワーゲージが下から上に向かって充填されるようにするためのものです。
 #10 はパワーゲージの枠のY座標です
 #GAUGE_HEIGHT はパワーゲージの全体の高さです。
@@ -150,25 +150,25 @@ def draw():
     pyxel.cls(0) #画面全体をクリアして、色0（通常は黒）で塗りつぶします。
 
     if game_state == STATE_PLAYING: #ゲームがプレイ中のとき (STATE_PLAYING)
-        pyxel.rect(118, 140, 20, 20, 11)# 位置(118, 140)に幅20、高さ20、色11の矩形を描画します。
+        pyxel.rect(43, 104, 12, 8, 11)# 位置(118(横方向), 140(高さ方向))に幅20、高さ20、色11の矩形を描画します。
 #鼻毛の状態に応じた描画
         if not hair_falling and hair_regrow_frame >= HAIR_REGROW_DELAY: #hair_falling が False で hair_regrow_frame が HAIR_REGROW_DELAY 以上の場合、円（鼻毛の再生）を描画し、その下に線を引きます。
-            pyxel.circ(128, 150, 3, 6)
-            pyxel.line(128, 153, 128, 165, 7)
+            #pyxel.circ(43 + 12, 104 + 8, 3, 6) # 鼻の穴の描写
+            pyxel.line(53 , 111, 53, 117, 7) # 鼻毛を描画(横軸、縦軸から、横軸、縦軸までラインを引く)
         elif hair_falling:
-            pyxel.line(128, 153 + hair_fall_frame * 2, 128, 165 + hair_fall_frame * 2, 7)
+            pyxel.line(53, 111 + hair_fall_frame * 2, 53, 117 + hair_fall_frame * 2, 7)
 
         draw_power_meter()  #パワーメーターの描画
 
         # 成功・失敗のメッセージを描画
         writer = puf.Writer("ipa_gothic.ttf")
-        writer.draw(110, 180, message, 14, 7)
+        writer.draw(110 / 5, 180 / 5, message, 14, 7)
 
-        show_mozinai(350, 10, f"残り時間: {time_left // 30}", 14, 7)
+        show_mozinai(350 / 5, 10 / 5, f"残り時間: {time_left // 30}", 14, 7)
 
-        writer.draw(350, 50, f"スペシャル残数: {special_count}", 14, 7)
+        writer.draw(350 / 5, 50 / 5, f"スペシャル残数: {special_count}", 14, 7)
         
-        show_mozinai(350, 30, f"抜いた鼻毛: {success_count}", 14, 7)
+        show_mozinai(350 / 5, 30 / 5, f"抜いた鼻毛: {success_count}", 14, 7)
 
         # 毛抜アイテムの使用回数を表示
         writer.draw(350, 70, f"毛抜残数: {tweezer_count}", 14, 7)
