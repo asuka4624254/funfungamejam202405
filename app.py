@@ -293,10 +293,10 @@ class App:
 
         self.draw_power_meter()
 
-        pyxel.text(110 / 5, 180 / 5, message, 1)
+        pyxel.text(110 / 5, 50, message, 1)
 
-        pyxel.text(68, 8, f"TIME:{time_left // 30}", 1)
-        pyxel.text(68, 15, f"LEFT:{hair_left}", 1)
+        pyxel.text(64, 8, f"TIME:{time_left // 30}", 1)
+        pyxel.text(64, 15, f"LEFT:{hair_left}", 1)
 
     def draw_tweezer(self):
         if tweezer_count >= 1:
