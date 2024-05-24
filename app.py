@@ -140,6 +140,7 @@ class App:
     def update(self):
         global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active
         if self.state == GameState.SPLASH:
+            self.timeline.reset()
             self.check_click(GameState.PROLOGUE)
         elif self.state == GameState.PROLOGUE:
             self.check_click(GameState.GAME_START)

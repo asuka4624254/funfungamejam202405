@@ -56,6 +56,10 @@ class TextManager:
     def load_images(self):
         pyxel.images[1].load(0, 0, "assets/002.png")
 
+    def reset(self):
+        for key in self.texts:
+            self.texts[key].start_frame = 0
+
     def draw_animation(self, text_name):
         text = self.texts[text_name]
         if text.start_frame == 0:

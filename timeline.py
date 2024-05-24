@@ -19,6 +19,10 @@ class TimelineManager:
 
         self.start_frame = 0  # 同時に1つしか再生できない
 
+    def reset(self):
+        self.start_frame = 0
+        self.text.reset()
+
     def play(self, timeline_name):
         if self.start_frame == 0:
             self.start_frame = pyxel.frame_count
