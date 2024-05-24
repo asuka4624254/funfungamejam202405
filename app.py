@@ -53,6 +53,7 @@ class App:
         pyxel.init(
             SCREEN_WIDTH, SCREEN_HEIGHT, fps=DEFAULT_FPS, display_scale=DISPLAY_SCALE
         )
+        pyxel.mouse(True)
 
         self.state = GameState.SPLASH
         self.start_time = time.time()
@@ -217,7 +218,7 @@ class App:
             self.start_time = time.time()
 
     def check_click(self, next_status):
-        if pyxel.btnp(pyxel.KEY_SPACE):
+        if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT):
             self.state = next_status
 
     def draw(self):
