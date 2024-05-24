@@ -8,6 +8,7 @@ DEFAULT_FPS = 30
 
 class TimelineName(IntEnum):
     Prologue = auto()
+    Ready = auto()
 
 
 class TimelineManager:
@@ -39,6 +40,12 @@ class TimelineManager:
 
             if current_frame >= start_frame and current_frame <= end_frame:
                 event_func()
+
+    def is_play(self, timeline_name):
+        current_frame = pyxel.frame_count - self.start_frame
+        elapsed_seconds = current_frame / DEFAULT_FPS
+        end_seconds = self.timelines[timeline_name][-1][1]
+        return elapsed_seconds < end_seconds
 
     def set_timeline_events(self):
         image = ImageManager()
@@ -87,8 +94,11 @@ class TimelineManager:
             ],
             [27.7, 31.4, lambda: self.text.draw_animation(TextName.Prologue_07_02)],
             [28.9, 31.4, lambda: self.text.draw_animation(TextName.Prologue_07_03)],
+        ]
+
+        self.timelines[TimelineName.Ready] = [
             # Ready
-            [31.9, 32.9, lambda: image.draw(ImageName.Ready, 15, 58)],
+            [1, 2.5, lambda: image.draw(ImageName.Ready, 15, 58)],
             # Go
-            [33.1, 40, lambda: image.draw(ImageName.Go, 28, 58)],
+            [2.7, 4.2, lambda: image.draw(ImageName.Go, 28, 58)],
         ]
