@@ -1,5 +1,4 @@
 import pyxel
-import PyxelUniversalFont as puf
 from enum import IntEnum, auto
 
 DEFAULT_FPS = 30
@@ -50,8 +49,6 @@ class TextManager:
     def __init__(self):
         self.texts = {}
         self.set_texts()
-
-        self.writer = puf.Writer("misaki_gothic.ttf")
 
     def draw_animation(self, text_name):
         text = self.texts[text_name]

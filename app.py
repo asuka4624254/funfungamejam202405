@@ -2,7 +2,6 @@ import pyxel
 import time
 
 from enum import Enum
-import PyxelUniversalFont as puf
 from image import ImageManager, ImageName
 from timeline import TimelineManager, TimelineName
 
@@ -80,23 +79,19 @@ class App:
         elif self.state == GameState.RETRY:
             self.show_retry()
 
-    def show_mozi(self, x, y, text, size, color):
-        writer = puf.Writer("ipa_gothic.ttf")
-        writer.draw(x, y, text, size, color)
-
     def show_splash(self):
         self.image.draw(ImageName.Bear_01, 36, 41)
         self.image.draw(ImageName.Logo, 14, 85)
 
     def show_prologue(self):
-        self.show_mozi(0, 0, "PROLOGUE", 10, 0)
+        pyxel.text(0, 0, "PROLOGUE", 10)
         self.timeline.play(TimelineName.Prologue)
 
     def show_game_start(self):
-        self.show_mozi(0, 0, "GAME START", 10, 0)
+        pyxel.text(0, 0, "GAME START", 10)
 
     def start_game(self):
-        self.show_mozi(0, 0, "PLAY", 10, 0)
+        pyxel.text(0, 0, "PLAY", 10)
         self.image.draw(ImageName.BearFace, 3, 84)
         self.image.draw(ImageName.Tweezers_01, 76, 32, animation_speed=0.8)
         self.image.draw(ImageName.Tweezers_01, 76, 46, animation_speed=0.8)
@@ -104,17 +99,17 @@ class App:
         self.image.draw(ImageName.PenguinS_02, 41, 17)
 
     def show_game_end(self):
-        self.show_mozi(0, 0, "WIN / LOSE", 10, 0)
+        pyxel.text(0, 0, "WIN / LOSE", 10)
         self.image.draw(ImageName.CLEAR_BG_01, 3, 36)
         self.image.draw(ImageName.CLEAR, 17, 52)
 
     def show_result(self):
-        self.show_mozi(0, 0, "RESULT", 10, 0)
+        pyxel.text(0, 0, "RESULT", 10)
         self.image.draw(ImageName.PenguinM_02, 34, 26)
         self.image.draw(ImageName.PenguinL_02, 23, 40)
 
     def show_retry(self):
-        self.show_mozi(0, 0, "RETRY ", 10, 0)
+        pyxel.text(0, 0, "RETRY ", 10)
 
 
 App()
