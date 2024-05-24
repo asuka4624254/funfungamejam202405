@@ -242,7 +242,6 @@ class App:
         self.image.draw(ImageName.Logo, 14, 85)
 
     def show_prologue(self):
-        pyxel.text(0, 0, "PROLOGUE", 10)
         self.timeline.play(TimelineName.Prologue)
 
     def show_game_start(self):
@@ -265,16 +264,15 @@ class App:
         self.draw_power_meter()  # パワーメーターの描画
 
         # 成功・失敗のメッセージを描画
-        writer = puf.Writer("ipa_gothic.ttf")
-        writer.draw(110 / 5, 180 / 5, message, 14, 7)
+        pyxel.text(110 / 5, 180 / 5, message, 1)
 
-        self.show_mozi(350 / 5, 10 / 5, f"残り時間: {time_left // 30}", 14, 7)
-        self.show_mozi(350 / 5, 50 / 5, f"スペシャル残数: {special_count}", 14, 7)
-        self.show_mozi(350 / 5, 30 / 5, f"抜いた鼻毛: {success_count}", 14, 7)
-        writer.draw(350, 70, f"毛抜残数: {tweezer_count}", 14, 7)
+        pyxel.text(350 / 5, 10 / 5, f"LEFT TIME: {time_left // 30}", 1)
+        pyxel.text(350 / 5, 50 / 5, f"SPECIAL LEFT: {special_count}", 1)
+        pyxel.text(350 / 5, 30 / 5, f"SUCCESS COUNT: {success_count}", 1)
+        pyxel.text(350, 70, f"HAIR COUNT: {tweezer_count}", 1)
 
     def show_game_end(self):
-        self.show_mozi(0, 0, "GAME END", 10, 0)
+        pyxel.text(0, 0, "GAME END", 1)
 
     def show_result(self):
         pyxel.text(0, 0, "RESULT", 10)
