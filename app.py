@@ -164,9 +164,20 @@ class App:
                 self.handle_special_key()  # スペシャルが押されたときの関数を動かす(スペシャル)
 
             if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) and (
-                ((76 <= pyxel.mouse_x <= 92) and (32 <= pyxel.mouse_y <= 43))
-                or ((76 <= pyxel.mouse_x <= 92) and (46 <= pyxel.mouse_y <= 57))
-                or ((76 <= pyxel.mouse_x <= 92) and (60 <= pyxel.mouse_y <= 71))
+                (
+                    tweezer_count >= 1
+                    and (76 <= pyxel.mouse_x <= 92)
+                    and (32 <= pyxel.mouse_y <= 43)
+                )
+                or (
+                    tweezer_count >= 2
+                    and (76 <= pyxel.mouse_x <= 92)
+                    and (46 <= pyxel.mouse_y <= 57)
+                )
+                or (
+                    (tweezer_count >= 3 and 76 <= pyxel.mouse_x <= 92)
+                    and (60 <= pyxel.mouse_y <= 71)
+                )
             ):  # pyxelのライブラリ関数 Tキーが押された瞬間の検出
                 self.handle_tweezer_key()  # 毛抜ボタンが押されたときの関数を動かす(スペシャル)
 
@@ -268,26 +279,28 @@ class App:
         # 成功・失敗のメッセージを描画
         pyxel.text(110 / 5, 180 / 5, message, 1)
 
-        pyxel.text(350 / 5, 10 / 5, f"LT: {time_left // 30}", 1)
+        pyxel.text(350 / 5, 10 / 5, f"LT: {time_left // 30}", 1)  # 残り時間
         pyxel.text(350 / 5, 50 / 5, f"SP: {special_count}", 1)
         pyxel.text(350 / 5, 30 / 5, f"SC: {success_count}", 1)
-        pyxel.text(350, 70, f"HC: {tweezer_count}", 1)
 
     def draw_tweezer(self):
-        if (76 <= pyxel.mouse_x <= 92) and (32 <= pyxel.mouse_y <= 43):
-            self.image.draw(ImageName.Tweezers_01, 76, 32, animation_speed=0.8)
-        else:
-            self.image.draw(ImageName.Tweezers_03, 76, 32)
+        if tweezer_count >= 1:
+            if (76 <= pyxel.mouse_x <= 92) and (32 <= pyxel.mouse_y <= 43):
+                self.image.draw(ImageName.Tweezers_01, 76, 32, animation_speed=0.8)
+            else:
+                self.image.draw(ImageName.Tweezers_03, 76, 32)
 
-        if (76 <= pyxel.mouse_x <= 92) and (46 <= pyxel.mouse_y <= 57):
-            self.image.draw(ImageName.Tweezers_01, 76, 46, animation_speed=0.8)
-        else:
-            self.image.draw(ImageName.Tweezers_03, 76, 46)
+        if tweezer_count >= 2:
+            if (76 <= pyxel.mouse_x <= 92) and (46 <= pyxel.mouse_y <= 57):
+                self.image.draw(ImageName.Tweezers_01, 76, 46, animation_speed=0.8)
+            else:
+                self.image.draw(ImageName.Tweezers_03, 76, 46)
 
-        if (76 <= pyxel.mouse_x <= 92) and (60 <= pyxel.mouse_y <= 71):
-            self.image.draw(ImageName.Tweezers_01, 76, 60, animation_speed=0.8)
-        else:
-            self.image.draw(ImageName.Tweezers_03, 76, 60)
+        if tweezer_count >= 3:
+            if (76 <= pyxel.mouse_x <= 92) and (60 <= pyxel.mouse_y <= 71):
+                self.image.draw(ImageName.Tweezers_01, 76, 60, animation_speed=0.8)
+            else:
+                self.image.draw(ImageName.Tweezers_03, 76, 60)
 
     def draw_penguin(self):
         if time_left > 200:

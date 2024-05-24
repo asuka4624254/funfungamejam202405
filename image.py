@@ -10,6 +10,7 @@ class ImageName(IntEnum):
     Tweezers_01 = auto()
     Tweezers_02 = auto()
     Tweezers_03 = auto()
+    TweezersUsed = auto()
     PenguinS_01 = auto()
     PenguinS_02 = auto()
     PenguinS_03 = auto()
@@ -87,6 +88,9 @@ class ImageManager:
         self.assets[ImageName.Tweezers_03] = ImageInfo(
             0, 129, 0, 16, 13
         )  # キラキラなし毛抜き
+        self.assets[ImageName.TweezersUsed] = ImageInfo(
+            0, 130, 13, 16, 13
+        )  # 使用済み毛抜き
 
         self.assets[ImageName.PenguinS_01] = ImageInfo(0, 91, 13, 13, 16)
         self.assets[ImageName.PenguinS_02] = ImageInfo(
