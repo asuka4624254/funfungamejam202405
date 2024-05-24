@@ -27,8 +27,8 @@ class GameState(Enum):
     PROLOGUE = 2
     GAME_START = 3
     PLAY = 4  # STATE_PLAYING から変更する
-    GAME_END = 5  # STATE_GAME_OVERから変更する
-    RESULT = 6
+    GAME_CLEAR = 5  # STATE_GAME_OVERから変更する
+    GAME_MISS = 6
     RETRY = 7
 
 
@@ -191,14 +191,10 @@ class App:
                     hair_regrow_frame += 1  # 鼻毛の再生フレーム数を1増やす
 
             if time_left <= 0:  # 時間が0秒以下か確認
-                self.state = GameState.GAME_END  # ゲームの状態をGAME_ENDに設定
-        elif self.state == GameState.GAME_END:
-            self.check_click(GameState.RESULT)
-            if pyxel.btnp(
-                pyxel.KEY_RETURN
-            ):  # pyxelのライブラリ関数でエンターをおしたなら
-                self.reset_game()  # リスタートゲームの関数を呼び出し
-        elif self.state == GameState.RESULT:
+                self.state = GameState.GAME_MISS  # ゲームの状態をGAME_ENDに設定
+        elif self.state == GameState.GAME_CLEAR:
+            self.check_click(GameState.RETRY)
+        elif self.state == GameState.GAME_MISS:
             self.check_click(GameState.RETRY)
         elif self.state == GameState.RETRY:
             self.check_click(GameState.SPLASH)
@@ -246,10 +242,10 @@ class App:
             self.show_game_start()
         elif self.state == GameState.PLAY:
             self.start_game()
-        elif self.state == GameState.GAME_END:
-            self.show_game_end()
-        elif self.state == GameState.RESULT:
-            self.show_result()
+        elif self.state == GameState.GAME_CLEAR:
+            self.show_game_clear()
+        elif self.state == GameState.GAME_MISS:
+            self.show_game_miss()
         elif self.state == GameState.RETRY:
             self.show_retry()
 
@@ -316,13 +312,11 @@ class App:
         else:
             self.image.draw(ImageName.BearFace, 3, 84)
 
-    def show_game_end(self):
-        pyxel.text(0, 0, "GAME END", 1)
+    def show_game_clear(self):
+        self.image.draw(ImageName.Clear_01, 3, 42)
 
-    def show_result(self):
-        pyxel.text(0, 0, "RESULT", 10)
-        self.image.draw(ImageName.PenguinM_02, 34, 26)
-        self.image.draw(ImageName.PenguinL_02, 23, 40)
+    def show_game_miss(self):
+        self.image.draw(ImageName.Miss_01, 12, 52)
 
     def show_retry(self):
         self.image.draw(ImageName.Reset_01, 30, 49)

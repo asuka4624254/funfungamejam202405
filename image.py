@@ -34,6 +34,11 @@ class ImageName(IntEnum):
     Reset_01 = auto()
     Reset_02 = auto()
 
+    Clear_01 = auto()
+    Clear_02 = auto()
+    Miss_01 = auto()
+    Miss_02 = auto()
+
 
 class ImageInfo:
     def __init__(self, index, u, v, w, h, animate_with=None):
@@ -54,6 +59,7 @@ class ImageManager:
 
     def load_images(self):
         pyxel.images[0].load(0, 0, "assets/001.png")
+        pyxel.images[2].load(0, 0, "assets/003.png")
 
     def draw(
         self, image_asset, x, y, animation_speed=0.4
@@ -129,3 +135,8 @@ class ImageManager:
             0, 0, 222, 36, 31, ImageName.Reset_02
         )
         self.assets[ImageName.Reset_02] = ImageInfo(0, 36, 222, 36, 31)
+
+        self.assets[ImageName.Clear_01] = ImageInfo(2, 0, 0, 89, 55, ImageName.Clear_02)
+        self.assets[ImageName.Clear_02] = ImageInfo(2, 0, 89, 89, 55)
+        self.assets[ImageName.Miss_01] = ImageInfo(2, 0, 55, 75, 38, ImageName.Miss_02)
+        self.assets[ImageName.Miss_02] = ImageInfo(2, 75, 55, 75, 38)
