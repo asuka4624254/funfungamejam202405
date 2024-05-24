@@ -250,12 +250,23 @@ class App:
         pyxel.text(0, 0, "GAME START", 10)
 
     def start_game(self):
-        pyxel.text(0, 0, "PLAY", 10)
-        self.image.draw(ImageName.BearFace, 3, 84)
         self.image.draw(ImageName.Tweezers_01, 76, 32, animation_speed=0.8)
         self.image.draw(ImageName.Tweezers_01, 76, 46, animation_speed=0.8)
         self.image.draw(ImageName.Tweezers_01, 76, 60, animation_speed=0.8)
-        self.image.draw(ImageName.PenguinS_02, 41, 17)
+
+        # ペンギン
+        if time_left > 200:
+            self.image.draw(ImageName.PenguinS_02, 41, 17)
+        elif time_left > 100:
+            self.image.draw(ImageName.PenguinM_02, 34, 26)
+        else:
+            self.image.draw(ImageName.PenguinL_02, 23, 40)
+
+        # しろくま
+        if time_left < 30:
+            self.image.draw(ImageName.Prologue_BearFace_01, 3, 84)
+        else:
+            self.image.draw(ImageName.BearFace, 3, 84)
 
         # 鼻毛の状態に応じた描画
         if not hair_falling and hair_regrow_frame >= HAIR_REGROW_DELAY:
@@ -268,10 +279,10 @@ class App:
         # 成功・失敗のメッセージを描画
         pyxel.text(110 / 5, 180 / 5, message, 1)
 
-        pyxel.text(350 / 5, 10 / 5, f"LEFT TIME: {time_left // 30}", 1)
-        pyxel.text(350 / 5, 50 / 5, f"SPECIAL LEFT: {special_count}", 1)
-        pyxel.text(350 / 5, 30 / 5, f"SUCCESS COUNT: {success_count}", 1)
-        pyxel.text(350, 70, f"HAIR COUNT: {tweezer_count}", 1)
+        pyxel.text(350 / 5, 10 / 5, f"LT: {time_left // 30}", 1)
+        pyxel.text(350 / 5, 50 / 5, f"SP: {special_count}", 1)
+        pyxel.text(350 / 5, 30 / 5, f"SC: {success_count}", 1)
+        pyxel.text(350, 70, f"HC: {tweezer_count}", 1)
 
     def show_game_end(self):
         pyxel.text(0, 0, "GAME END", 1)
