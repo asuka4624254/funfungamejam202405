@@ -250,8 +250,8 @@ class App:
             self.show_retry()
 
     def show_splash(self):
-        self.image.draw(ImageName.Bear_01, 36, 41)
-        self.image.draw(ImageName.Logo, 14, 85)
+        self.image.draw(ImageName.Bear_01, 36, 35)
+        self.image.draw(ImageName.Logo_01, 14, 81)
 
     def show_prologue(self):
         self.timeline.play(TimelineName.Prologue)
@@ -275,9 +275,8 @@ class App:
         # 成功・失敗のメッセージを描画
         pyxel.text(110 / 5, 180 / 5, message, 1)
 
-        pyxel.text(350 / 5, 10 / 5, f"LT: {time_left // 30}", 1)  # 残り時間
-        pyxel.text(350 / 5, 50 / 5, f"SP: {special_count}", 1)
-        pyxel.text(350 / 5, 30 / 5, f"SC: {success_count}", 1)
+        pyxel.text(68, 8, f"TIME:{time_left // 30}", 1)  # 残り時間
+        pyxel.text(68, 15, f"LEFT:{success_count}", 1)
 
     def draw_tweezer(self):
         if tweezer_count >= 1:
