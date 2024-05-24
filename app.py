@@ -23,8 +23,7 @@ TWEEZER_SLOWDOWN = 0.5
 HARD_MODE_MULTIPLIER = 2
 HARD_MODE_HAIR_COUNT = 20
 
-SHAKE_DURATION = 60  # 画面を揺らすフレーム数
-SHAKE_INTERVAL = 30  # 画面を揺らした後のインターバル
+SHAKE_INTERVAL = 90  # 画面を揺らした後のインターバル
 
 class GameState(Enum):
     SPLASH = 1
@@ -49,12 +48,11 @@ hair_fall_frame = 0
 hair_regrow_frame = 0
 last_state_change_time = time.time()
 is_hard_mode = False
-shake_frame = 0
 shake_interval = 0
 
 class App:
     def __init__(self, n):
-        global hair_left, last_state_change_time, is_hard_mode, shake_frame, shake_interval
+        global hair_left, last_state_change_time, shake_interval
         pyxel.init(SCREEN_WIDTH, SCREEN_HEIGHT, fps=DEFAULT_FPS, display_scale=DISPLAY_SCALE)
         pyxel.mouse(True)
 
@@ -67,14 +65,12 @@ class App:
         hair_left = n
         last_state_change_time = time.time()
         self.state_change_allowed = True
-        is_hard_mode = False
-        shake_frame = 0
         shake_interval = 0
 
         pyxel.run(self.update, self.draw)
 
     def reset_game(self):
-        global power, increasing, message, time_left, special_count, hair_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_count, tweezer_active, last_state_change_time, is_hard_mode, shake_frame, shake_interval
+        global power, increasing, message, time_left, special_count, hair_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_count, tweezer_active, last_state_change_time, shake_interval
         power = 0
         increasing = True
         message = ""
@@ -88,7 +84,6 @@ class App:
         hair_regrow_frame = 0
         last_state_change_time = time.time()
         self.state_change_allowed = True
-        shake_frame = 0
         shake_interval = 0
         if is_hard_mode:
             hair_left = HARD_MODE_HAIR_COUNT
@@ -140,7 +135,7 @@ class App:
             message = "毛抜使うよ！"
 
     def update(self):
-        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, shake_frame, shake_interval
+        global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, shake_interval
         if not self.state_change_allowed and time.time() - last_state_change_time > 1:
             self.state_change_allowed = True
 
@@ -199,7 +194,6 @@ class App:
 
             if time_left <= 0:
                 self.state = GameState.GAME_MISS
-                shake_frame = SHAKE_DURATION
                 shake_interval = SHAKE_INTERVAL
                 self.set_state_change_time()
         elif self.state == GameState.GAME_CLEAR:
@@ -208,9 +202,7 @@ class App:
             self.check_click(GameState.RETRY)
         elif self.state == GameState.GAME_MISS:
             is_hard_mode = False
-            if shake_frame > 0:
-                shake_frame -= 1
-            elif shake_interval > 0:
+            if shake_interval > 0:
                 shake_interval -= 1
             else:
                 self.check_click(GameState.RETRY)
@@ -247,15 +239,7 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-
-        if shake_frame > 0:
-            offset_x = random.randint(-40, 40)
-            offset_y = random.randint(-40, 40)
-        else:
-            offset_x = 0
-            offset_y = 0
-
-        self.image.draw(ImageName.BG_01, 0 + offset_x, 0 + offset_y)
+        self.image.draw(ImageName.BG_01, 0, 0)
 
         if self.state == GameState.SPLASH:
             self.show_splash()
