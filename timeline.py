@@ -71,8 +71,8 @@ class TimelineManager:
             [14.9, 17.6, lambda: self.text.draw_animation(TextName.Prologue_04_02)],
             [16.4, 17.6, lambda: self.text.draw_animation(TextName.Prologue_04_03)],
             # 「はなからア、アレが…」4, 10
-            [17.6, 20.5, lambda: self.text.draw_animation(TextName.Prologue_05_01)],
-            [18.5, 20.5, lambda: self.text.draw_animation(TextName.Prologue_05_02)],
+            [17.6, 23, lambda: self.text.draw_animation(TextName.Prologue_05_01)],
+            [18.5, 23, lambda: self.text.draw_animation(TextName.Prologue_05_02)],
             # しろくま表示
             [20.5, 23, lambda: image.draw(ImageName.Prologue_BearFace_01, 3, 84)],
             # 「ペンギンさんに見られる前に…」7, 6, 7
@@ -88,7 +88,7 @@ class TimelineManager:
             [27.7, 31.4, lambda: self.text.draw_animation(TextName.Prologue_07_02)],
             [28.9, 31.4, lambda: self.text.draw_animation(TextName.Prologue_07_03)],
             # Ready
-            [31.4, 32.4, lambda: image.draw(ImageName.Ready, 15, 52)],
+            [31.9, 32.9, lambda: image.draw(ImageName.Ready, 15, 58)],
             # Go
-            [32.4, 40, lambda: image.draw(ImageName.Go, 28, 52)],
+            [33.1, 40, lambda: image.draw(ImageName.Go, 28, 58)],
         ]
