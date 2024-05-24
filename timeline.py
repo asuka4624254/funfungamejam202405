@@ -46,35 +46,49 @@ class TimelineManager:
         self.timelines[TimelineName.Prologue] = [
             # 開始秒数, 終了秒数, 実行内容
             # 開始秒数は、1文字0.1秒 + インターバル0.5秒（画面遷移時はインターバル1秒）
-            # 「ペンギンさんとおでかけに…」
-            [1, 6.2, lambda: self.text.draw_animation(TextName.Prologue_01_01)],
-            [2.2, 6.2, lambda: self.text.draw_animation(TextName.Prologue_01_02)],
-            [3.4, 6.2, lambda: self.text.draw_animation(TextName.Prologue_01_03)],
-            [4.6, 6.2, lambda: self.text.draw_animation(TextName.Prologue_01_04)],
-            # 「あ！ペンギンさんだ！…」
-            [7.2, 10.1, lambda: self.text.draw_animation(TextName.Prologue_02_01)],
-            [8.7, 10.1, lambda: self.text.draw_animation(TextName.Prologue_02_02)],
+            # カーテン
+            [0, 0.2, lambda: image.draw(ImageName.Curtain_01, 0, 0)],
+            [0.2, 0.4, lambda: image.draw(ImageName.Curtain_02, 0, 0)],
+            [0.4, 0.6, lambda: image.draw(ImageName.Curtain_03, 0, 0)],
+            [0.6, 0.8, lambda: image.draw(ImageName.Curtain_04, 0, 0)],
+            [0.8, 1, lambda: image.draw(ImageName.Curtain_05, 0, 0)],
+            # 「ペンギンさんとおでかけに…」7, 7, 7, 6
+            [1, 5.7, lambda: self.text.draw_animation(TextName.Prologue_01_01)],
+            [2.2, 5.7, lambda: self.text.draw_animation(TextName.Prologue_01_02)],
+            [3.4, 5.7, lambda: self.text.draw_animation(TextName.Prologue_01_03)],
+            [4.6, 5.7, lambda: self.text.draw_animation(TextName.Prologue_01_04)],
+            # 「あ！ペンギンさんだ！…」10, 4
+            [5.7, 8.1, lambda: self.text.draw_animation(TextName.Prologue_02_01)],
+            [7.2, 8.1, lambda: self.text.draw_animation(TextName.Prologue_02_02)],
             # ペンギン表示
-            [11.1, 14.1, lambda: image.draw(ImageName.Prologue_Penguin_01, 32, 19)],
-            # 「わー、今日は楽しみだなぁ…」
-            [15.1, 19.7, lambda: self.text.draw_animation(TextName.Prologue_03_01)],
-            [16.2, 19.7, lambda: self.text.draw_animation(TextName.Prologue_03_02)],
-            [18.4, 19.7, lambda: self.text.draw_animation(TextName.Prologue_03_03)],
-            # 「ふっと、こおりにうつった…」
-            [20.7, 25.7, lambda: self.text.draw_animation(TextName.Prologue_04_01)],
-            [22, 25.7, lambda: self.text.draw_animation(TextName.Prologue_04_02)],
-            [23.5, 25.7, lambda: self.text.draw_animation(TextName.Prologue_04_03)],
-            # 「はなからア、アレが…」
-            [26.7, 32.6, lambda: self.text.draw_animation(TextName.Prologue_05_01)],
-            [27.6, 32.6, lambda: self.text.draw_animation(TextName.Prologue_05_02)],
+            [8.1, 10.6, lambda: image.draw(ImageName.Prologue_Penguin_01, 32, 19)],
+            # 「わー、今日は楽しみだなぁ…」6, 6, 3
+            [10.6, 13.6, lambda: self.text.draw_animation(TextName.Prologue_03_01)],
+            [11.7, 13.6, lambda: self.text.draw_animation(TextName.Prologue_03_02)],
+            [12.8, 13.6, lambda: self.text.draw_animation(TextName.Prologue_03_03)],
+            # 「ふっと、こおりにうつった…」8, 10, 7
+            [13.6, 17.6, lambda: self.text.draw_animation(TextName.Prologue_04_01)],
+            [14.9, 17.6, lambda: self.text.draw_animation(TextName.Prologue_04_02)],
+            [16.4, 17.6, lambda: self.text.draw_animation(TextName.Prologue_04_03)],
+            # 「はなからア、アレが…」4, 10
+            [17.6, 20.5, lambda: self.text.draw_animation(TextName.Prologue_05_01)],
+            [18.5, 20.5, lambda: self.text.draw_animation(TextName.Prologue_05_02)],
             # しろくま表示
-            [29.6, 32.6, lambda: image.draw(ImageName.Prologue_BearFace_01, 3, 84)],
-            # 「ペンギンさんに見られる前に…」
-            [33.6, 37.6, lambda: self.text.draw_animation(TextName.Prologue_06_01)],
-            [34.8, 37.6, lambda: self.text.draw_animation(TextName.Prologue_06_02)],
-            [35.9, 37.6, lambda: self.text.draw_animation(TextName.Prologue_06_03)],
-            # 「タイミングよく…」
-            [38.6, 42.8, lambda: self.text.draw_animation(TextName.Prologue_07_01)],
-            [39.8, 42.8, lambda: self.text.draw_animation(TextName.Prologue_07_02)],
-            [41.3, 42.8, lambda: self.text.draw_animation(TextName.Prologue_07_03)],
+            [20.5, 23, lambda: image.draw(ImageName.Prologue_BearFace_01, 3, 84)],
+            # 「ペンギンさんに見られる前に…」7, 6, 7
+            [23, 26.5, lambda: self.text.draw_animation(TextName.Prologue_06_01)],
+            [24.2, 26.5, lambda: self.text.draw_animation(TextName.Prologue_06_02)],
+            [25.3, 26.5, lambda: self.text.draw_animation(TextName.Prologue_06_03)],
+            # 「タイミングよく…」7, 7, 5
+            [
+                26.5,
+                31.4,
+                lambda: self.text.draw_animation(TextName.Prologue_07_01),
+            ],
+            [27.7, 31.4, lambda: self.text.draw_animation(TextName.Prologue_07_02)],
+            [28.9, 31.4, lambda: self.text.draw_animation(TextName.Prologue_07_03)],
+            # Ready
+            [31.4, 32.4, lambda: image.draw(ImageName.Ready, 15, 52)],
+            # Go
+            [32.4, 40, lambda: image.draw(ImageName.Go, 28, 52)],
         ]

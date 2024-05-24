@@ -40,6 +40,15 @@ class ImageName(IntEnum):
     Miss_01 = auto()
     Miss_02 = auto()
 
+    Curtain_01 = auto()
+    Curtain_02 = auto()
+    Curtain_03 = auto()
+    Curtain_04 = auto()
+    Curtain_05 = auto()
+
+    Ready = auto()
+    Go = auto()
+
 
 class ImageInfo:
     def __init__(self, index, u, v, w, h, animate_with=None):
@@ -142,3 +151,12 @@ class ImageManager:
         self.assets[ImageName.Clear_02] = ImageInfo(2, 0, 89, 89, 55)
         self.assets[ImageName.Miss_01] = ImageInfo(2, 0, 55, 75, 38, ImageName.Miss_02)
         self.assets[ImageName.Miss_02] = ImageInfo(2, 75, 55, 75, 38)
+
+        self.assets[ImageName.Curtain_01] = ImageInfo(2, 0, 93, 96, 118)
+        self.assets[ImageName.Curtain_02] = ImageInfo(2, 0, 93 + 20, 96, 118 - 20)
+        self.assets[ImageName.Curtain_03] = ImageInfo(2, 0, 93 + 40, 96, 118 - 40)
+        self.assets[ImageName.Curtain_04] = ImageInfo(2, 0, 93 + 60, 96, 118 - 60)
+        self.assets[ImageName.Curtain_05] = ImageInfo(2, 0, 93 + 80, 96, 118 - 80)
+
+        self.assets[ImageName.Ready] = ImageInfo(2, 96, 93, 66, 24)
+        self.assets[ImageName.Go] = ImageInfo(2, 96, 117, 41, 24)

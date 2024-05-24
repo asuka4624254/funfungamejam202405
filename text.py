@@ -83,7 +83,7 @@ class TextManager:
         self.texts[TextName.Prologue_01_01] = TextInfo(20, 62, 8 * 0)  # ペンギンさんと
         self.texts[TextName.Prologue_01_02] = TextInfo(20, 74, 8 * 1)  # おでかけに行く
         self.texts[TextName.Prologue_01_03] = TextInfo(20, 86, 8 * 2)  # 約束をしていた
-        self.texts[TextName.Prologue_01_04] = TextInfo(20, 98, 8 * 3)  # しろくまさん
+        self.texts[TextName.Prologue_01_04] = TextInfo(24, 98, 8 * 3)  # しろくまさん
 
         self.texts[TextName.Prologue_02_01] = TextInfo(
             10, 74, 8 * 4
@@ -112,7 +112,5 @@ class TextManager:
         self.texts[TextName.Prologue_06_03] = TextInfo(21, 68, 8 * 16)  # アレを抜こう！
 
         self.texts[TextName.Prologue_07_01] = TextInfo(22, 43, 8 * 17)  # タイミングよく
-        self.texts[TextName.Prologue_07_02] = TextInfo(
-            9, 55, 8 * 18
-        )  # スペースキーを押すと
+        self.texts[TextName.Prologue_07_02] = TextInfo(22, 55, 8 * 18)  # クリックすると
         self.texts[TextName.Prologue_07_03] = TextInfo(29, 67, 8 * 19)  # 抜けるよ！
