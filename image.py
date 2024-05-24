@@ -9,6 +9,7 @@ class ImageName(IntEnum):
     Tear = auto()
     Tweezers_01 = auto()
     Tweezers_02 = auto()
+    Tweezers_03 = auto()
     PenguinS_01 = auto()
     PenguinS_02 = auto()
     PenguinS_03 = auto()
@@ -83,6 +84,9 @@ class ImageManager:
             0, 97, 0, 16, 13, ImageName.Tweezers_02
         )
         self.assets[ImageName.Tweezers_02] = ImageInfo(0, 113, 0, 16, 13)
+        self.assets[ImageName.Tweezers_03] = ImageInfo(
+            0, 129, 0, 16, 13
+        )  # キラキラなし毛抜き
 
         self.assets[ImageName.PenguinS_01] = ImageInfo(0, 91, 13, 13, 16)
         self.assets[ImageName.PenguinS_02] = ImageInfo(

@@ -154,17 +154,19 @@ class App:
                 self.update_power()  # パワーゲージの関数を呼び出し
 
             if pyxel.btnp(
-                pyxel.KEY_SPACE
-            ):  # pyxelのライブラリ関数 スペースキーが押された瞬間の検出
-                self.handle_space_key()  # スペースキーを押されたときの関数を動かす(鼻毛を抜く)
+                pyxel.MOUSE_BUTTON_LEFT
+            ):  # pyxelのライブラリ関数 クリックされた瞬間の検出
+                self.handle_space_key()  # クリックされたときの関数を動かす(鼻毛を抜く)
 
             if pyxel.btnp(
                 pyxel.KEY_S
             ):  # pyxelのライブラリ関数 Sキーが押された瞬間の検出
                 self.handle_special_key()  # スペシャルが押されたときの関数を動かす(スペシャル)
 
-            if pyxel.btnp(
-                pyxel.KEY_T
+            if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) and (
+                ((76 <= pyxel.mouse_x <= 92) and (32 <= pyxel.mouse_y <= 43))
+                or ((76 <= pyxel.mouse_x <= 92) and (46 <= pyxel.mouse_y <= 57))
+                or ((76 <= pyxel.mouse_x <= 92) and (60 <= pyxel.mouse_y <= 71))
             ):  # pyxelのライブラリ関数 Tキーが押された瞬間の検出
                 self.handle_tweezer_key()  # 毛抜ボタンが押されたときの関数を動かす(スペシャル)
 
@@ -251,23 +253,9 @@ class App:
         pyxel.text(0, 0, "GAME START", 10)
 
     def start_game(self):
-        self.image.draw(ImageName.Tweezers_01, 76, 32, animation_speed=0.8)
-        self.image.draw(ImageName.Tweezers_01, 76, 46, animation_speed=0.8)
-        self.image.draw(ImageName.Tweezers_01, 76, 60, animation_speed=0.8)
-
-        # ペンギン
-        if time_left > 200:
-            self.image.draw(ImageName.PenguinS_02, 41, 17)
-        elif time_left > 100:
-            self.image.draw(ImageName.PenguinM_02, 34, 26)
-        else:
-            self.image.draw(ImageName.PenguinL_02, 23, 40)
-
-        # しろくま
-        if time_left < 30:
-            self.image.draw(ImageName.Prologue_BearFace_01, 3, 84)
-        else:
-            self.image.draw(ImageName.BearFace, 3, 84)
+        self.draw_tweezer()
+        self.draw_penguin()
+        self.draw_bear()
 
         # 鼻毛の状態に応じた描画
         if not hair_falling and hair_regrow_frame >= HAIR_REGROW_DELAY:
@@ -284,6 +272,36 @@ class App:
         pyxel.text(350 / 5, 50 / 5, f"SP: {special_count}", 1)
         pyxel.text(350 / 5, 30 / 5, f"SC: {success_count}", 1)
         pyxel.text(350, 70, f"HC: {tweezer_count}", 1)
+
+    def draw_tweezer(self):
+        if (76 <= pyxel.mouse_x <= 92) and (32 <= pyxel.mouse_y <= 43):
+            self.image.draw(ImageName.Tweezers_01, 76, 32, animation_speed=0.8)
+        else:
+            self.image.draw(ImageName.Tweezers_03, 76, 32)
+
+        if (76 <= pyxel.mouse_x <= 92) and (46 <= pyxel.mouse_y <= 57):
+            self.image.draw(ImageName.Tweezers_01, 76, 46, animation_speed=0.8)
+        else:
+            self.image.draw(ImageName.Tweezers_03, 76, 46)
+
+        if (76 <= pyxel.mouse_x <= 92) and (60 <= pyxel.mouse_y <= 71):
+            self.image.draw(ImageName.Tweezers_01, 76, 60, animation_speed=0.8)
+        else:
+            self.image.draw(ImageName.Tweezers_03, 76, 60)
+
+    def draw_penguin(self):
+        if time_left > 200:
+            self.image.draw(ImageName.PenguinS_02, 41, 17)
+        elif time_left > 100:
+            self.image.draw(ImageName.PenguinM_02, 34, 26)
+        else:
+            self.image.draw(ImageName.PenguinL_02, 23, 40)
+
+    def draw_bear(self):
+        if time_left < 30:
+            self.image.draw(ImageName.Prologue_BearFace_01, 3, 84)
+        else:
+            self.image.draw(ImageName.BearFace, 3, 84)
 
     def show_game_end(self):
         pyxel.text(0, 0, "GAME END", 1)
