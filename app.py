@@ -144,6 +144,7 @@ class App:
         elif self.state == GameState.PROLOGUE:
             self.check_click(GameState.GAME_START)
         elif self.state == GameState.GAME_START:
+            self.reset_game()  # TODO: 毎フレームリセットしてしまう
             self.check_click(GameState.PLAY)
         elif self.state == GameState.PLAY:
             if time_left > 0:  # 時間0秒以上か確認
