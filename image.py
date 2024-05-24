@@ -148,7 +148,7 @@ class ImageManager:
         self.assets[ImageName.Reset_02] = ImageInfo(0, 36, 222, 36, 31)
 
         self.assets[ImageName.Clear_01] = ImageInfo(2, 0, 0, 89, 55, ImageName.Clear_02)
-        self.assets[ImageName.Clear_02] = ImageInfo(2, 0, 89, 89, 55)
+        self.assets[ImageName.Clear_02] = ImageInfo(2, 89, 0, 89, 55)
         self.assets[ImageName.Miss_01] = ImageInfo(2, 0, 55, 75, 38, ImageName.Miss_02)
         self.assets[ImageName.Miss_02] = ImageInfo(2, 75, 55, 75, 38)
 
