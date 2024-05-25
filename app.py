@@ -71,7 +71,7 @@ class App:
 
         hair_left = n
         last_state_change_time = time.time()
-        self.state_change_allowed = True
+        self.state_change_allowed = False
         is_hard_mode = False
 
         pyxel.run(self.update, self.draw)
@@ -144,7 +144,12 @@ class App:
 
     def update(self):
         global time_left, hair_falling, hair_fall_frame, hair_regrow_frame, tweezer_active, is_hard_mode, high_score
-        if not self.state_change_allowed and time.time() - last_state_change_time > 1:
+
+        allowed_seconds = 2 if self.state == GameState.SPLASH else 1
+        if (
+            not self.state_change_allowed
+            and time.time() - last_state_change_time > allowed_seconds
+        ):
             self.state_change_allowed = True
 
         if self.state == GameState.SPLASH:
@@ -281,7 +286,9 @@ class App:
         self.image.draw(ImageName.Bear_01, 36, 35)
         self.image.draw(ImageName.Logo_01, 14, 81)
         if high_score is not None:
-            pyxel.text(4, 4, f"High Score: {high_score:.2f} sec", pyxel.COLOR_WHITE)  # ハイスコアを左上に表示
+            pyxel.text(
+                4, 4, f"High Score: {high_score:.2f} sec", pyxel.COLOR_WHITE
+            )  # ハイスコアを左上に表示
 
     def show_prologue(self):
         self.timeline.play(TimelineName.Prologue)
