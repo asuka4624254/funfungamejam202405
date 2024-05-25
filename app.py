@@ -88,7 +88,7 @@ class App:
         tweezer_active = False
         hair_falling = False
         hair_fall_frame = 0
-        hair_regrow_frame = 0
+        hair_regrow_frame = HAIR_REGROW_DELAY  # 初期状態で鼻毛が描写されるように設定
         last_state_change_time = time.time()
         self.state_change_allowed = True
         hair_left = NORMAL_MODE_HAIR_COUNT
