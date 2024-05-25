@@ -22,6 +22,7 @@ TWEEZER_SLOWDOWN = 0.5
 
 HARD_MODE_MULTIPLIER = 2  # ハードモードのゲージ上昇速度倍率
 HARD_MODE_HAIR_COUNT = 20  # ハードモードの抜く本数
+NORMAL_MODE_HAIR_COUNT = 10
 
 
 # ゲーム状態の定義
@@ -90,6 +91,8 @@ class App:
         hair_regrow_frame = 0
         last_state_change_time = time.time()
         self.state_change_allowed = True
+        hair_left = NORMAL_MODE_HAIR_COUNT
+        self.start_time = time.time()  # ゲーム開始時のタイムスタンプをリセット
         if is_hard_mode:
             hair_left = HARD_MODE_HAIR_COUNT
             tweezer_count = 0  # ハードモードでは毛抜が使えない
@@ -350,5 +353,5 @@ class App:
 
 
 # ゲーム開始時に n を指定する
-n = 10
+n = NORMAL_MODE_HAIR_COUNT
 App(n)

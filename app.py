@@ -92,6 +92,7 @@ class App:
         last_state_change_time = time.time()
         self.state_change_allowed = True
         hair_left = NORMAL_MODE_HAIR_COUNT
+        self.start_time = time.time()  # ゲーム開始時のタイムスタンプをリセット
         if is_hard_mode:
             hair_left = HARD_MODE_HAIR_COUNT
             tweezer_count = 0  # ハードモードでは毛抜が使えない
